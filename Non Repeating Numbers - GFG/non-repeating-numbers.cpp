@@ -8,18 +8,30 @@ class Solution
 public:
     vector<int> singleNumber(vector<int> nums) 
     {
-       unordered_map<int,int> m;
-        unordered_map<int,int> :: iterator it;
-       for(int i=0;i<nums.size();i++){
-           m[nums[i]]++;
-                  }
-                  vector<int>ans;
-        it=m.begin();
-        for(it;it!=m.end();it++){
-            if(it->second==1) ans.push_back(it->first);
+        int n=nums.size();
+        int xo=0;
+        for(int i: nums){
+            xo^=i;
         }
-        sort(ans.begin(),ans.end());
-        return ans;
+       // cout<<xo<<endl;
+        int rightmost_setbit=xo&~(xo-1);
+        //cout<<rightmost_setbit;
+        int x(0),y(0);
+        for(int i:nums){
+            if(i&rightmost_setbit){
+                x^=i;
+            }
+            else{
+                y^=i;
+            }
+           
+        }
+       // cout<<x<<" "<<y;
+         vector<int>ans;
+            ans.push_back(x);
+            ans.push_back(y);
+            sort(ans.begin(),ans.end());
+            return ans;
     }
 };
 
