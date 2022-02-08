@@ -1,42 +1,30 @@
 class Solution {
 public:
     
-    bool checkIfExists(vector<vector<int>>& graph, vector<bool>& visited,int target,int current) {
-        
-        if(visited[current] == true) return false;
-        
-        if(current == target) return true;
-        
-        visited[current] = true;
-        
-        for(int ctr = 0 ; ctr < graph[current].size(); ctr++) {
-            if(checkIfExists(graph,visited,target,graph[current][ctr])) return true;
-        }
-        
+    bool DFS(vector<vector<int>> &adj,vector<bool> &visited,int dest, int strt)
+{
+    if(visited[strt]==true) return false;
+        if(strt==dest) return true;
+        visited[strt]=true;
+   
+    for (int i=0; i < adj[strt].size(); ++i)
+      { 
+       if( DFS(adj,visited,dest,adj[strt][i])) return true;}
         return false;
-        
-    }
-    
-    bool validPath(int n, vector<vector<int>>& edges, int &start, int &end) {
-        
-        vector<vector<int>> graph(n);
-        
-        for(int ctr = 0 ; ctr < edges.size() ; ctr ++) {
-            
-            int first = edges[ctr][0], second = edges[ctr][1];
-            
-            graph[first].push_back(second);
-            graph[second].push_back(first);
-            
+       
+      }
+    bool validPath(int n, vector<vector<int>>& edges, int src, int dest) {
+
+        vector <vector<int>> adj(n);
+        for(auto p: edges){
+            adj[p[0]].push_back(p[1]);
+            adj[p[1]].push_back(p[0]);
         }
         
         vector<bool> visited(n,false);
-        
-        for(int ctr = 0 ; ctr < graph.size() ; ctr++) {
-            if(start == ctr && checkIfExists(graph,visited,end,ctr)) return true;
+        for(int i=0;i<n;i++){
+            if(i==src&&DFS(adj,visited,dest,i)) return true;
         }
-        
         return false;
-        
     }
 };
