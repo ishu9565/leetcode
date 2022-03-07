@@ -1,17 +1,24 @@
 class Solution {
 public:
-    int fac(int n){
-        if(n==1||n==0) return 1;
-        return n*fac(n-1);
-    }
-    vector<vector<int>> permute(vector<int>& nums) {
-        
-    vector<vector<int>> v;
-        int n=fac(nums.size());
-        while(n--){
-            v.push_back(nums);
-            next_permutation(nums.begin(),nums.end());
+    
+    vector <vector <int>> res;
+    
+    void solve(vector <int> &nums,int ind){
+        if(ind==nums.size()){
+            res.push_back(nums);
+            return;
         }
-        return v;
+        
+        for(int i=ind;i<nums.size();i++){
+            swap(nums[ind],nums[i]);
+            solve(nums,ind+1);
+            swap(nums[ind],nums[i]);
+        }
+    }
+    
+    
+    vector<vector<int>> permute(vector<int>& nums) {
+        solve(nums,0);
+        return res;
     }
 };
