@@ -8,31 +8,23 @@ class Solution
 {
     public:
     //Function to return max value that can be put in knapsack of capacity W.
-      int knapSack(int w, int wt[], int val[], int n) 
+      int ans_knapsack(int w, int wt[], int val[], int n,vector<vector<int>> &dp){
+        if(n==0||w==0) return 0;
+      
+        if(dp[n][w]!=-1) return dp[n][w];
+        
+        if(wt[n-1]<=w){
+            return dp[n][w]=max(val[n-1]+ans_knapsack(w-wt[n-1],wt,val,n-1,dp),ans_knapsack(w,wt,val,n-1,dp)); }
+            
+            else{
+                return dp[n][w]=ans_knapsack(w,wt,val,n-1,dp);
+            }
+    }   
+    int knapSack(int W, int wt[], int val[], int n) 
     { 
-       // Your code here
-       vector<vector<int>>dp(n+1,vector<int> (w+1,-1));
-       return fun(w,wt,val,n,dp);
-     
-    }
-    int fun(int w, int wt[], int val[], int n, vector<vector<int>> &dp)
-    {
-         if(n==1)
-       {
-           if(wt[n-1]<=w)
-           return val[n-1];
-           else
-           return 0;
-       }
-       if(w==0)
-       return 0;
-       if(dp[n][w]!=-1)
-       return dp[n][w];
-       int notake=0+fun(w,wt,val,n-1,dp);
-       int take=0;
-       if(wt[n-1]<=w)
-       take=val[n-1]+fun(w-wt[n-1],wt,val,n-1,dp);
-       return dp[n][w]=max(notake,take); 
+        vector<vector<int>>dp(n+1,vector<int>(W+1,-1));
+       
+        return ans_knapsack(W,wt,val,n,dp);
     }
 };
 
