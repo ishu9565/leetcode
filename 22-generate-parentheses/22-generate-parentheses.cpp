@@ -1,21 +1,39 @@
 class Solution {
 public:
-      vector<string> generateParenthesis(int n) {
-        vector<string > ans;
+    bool check_valid(string s){
+        stack<char> st;
+        for(int i=0;i<s.size();i++){
+            if(s[i]=='('){
+                st.push('(');}
+                else{
+                    if(st.size()==0) return false;
+                    else if(st.top()==')') return false;
+                        
+                    else
+                        st.pop();
+                
+            }
+        }
+        if(st.size()==0) return true;
+        else return false;
+        
+    }
+    vector<string> generateParenthesis(int n) 
+    {
+        vector<string>res;
         string s="";
-        check(ans,s,n,0);
-        return ans;
+        for(int i=0;i<n;i++){
+            s+="()";
+        }
+        res.push_back(s);
+      string g= s;
+          next_permutation(s.begin(),s.end());
+        while(g!=s){
+             if(check_valid(s)) 
+                 res.push_back(s);
+             next_permutation(s.begin(),s.end());
+        }
+        return res;
     }
-       void check(vector<string> &ans,string s, int n, int score){
-        if(score<0) return;
-        if(s.size()>2*n) return;
-        if(score==0&&s.length()==2*n) ans.push_back(s);
-        check(ans,s+"(",n,score+1);
-        check(ans,s+")",n,score-1);
-           return;
-    }
-  
-    
- 
     
 };
