@@ -4,10 +4,10 @@ public:
         if(i<0||j<0||i>(board.size()-1)||j>(board[0].size()-1)||(board[i][j]!='O')) return ;
         board[i][j]='A';
         cout<<i<<" "<<j<<endl;
-         if(i>0) dfs(board,i-1,j);
-         if(j>0) dfs(board,i,j-1);
-         if(i<board.size()-1) dfs(board,i+1,j);
-         if(j<board[0].size()-1) dfs(board,i,j+1);
+         dfs(board,i-1,j);
+         dfs(board,i,j-1);
+         dfs(board,i+1,j);
+         dfs(board,i,j+1);
     } 
         
     void solve(vector<vector<char>>& board) {
