@@ -18,7 +18,7 @@ public:
         one=zero_old;
     }
     return (zero%mod+one%mod)%mod;
-	}
+}
 };
 
 // { Driver Code Starts.
