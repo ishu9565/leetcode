@@ -35,7 +35,8 @@ public:
         for(int i=1;i<v.size();i++)
         { 
             p->right=v[i];
-            p->left=NULL; p=p->right; p->left=NULL;p->right=NULL;
+            p->left=NULL; p=p->right;
+            // p->left=NULL;p->right=NULL;
         }
         /*
         TreeNode* ans=new TreeNode(v[0]);
