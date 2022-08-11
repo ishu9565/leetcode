@@ -8,14 +8,7 @@ public:
         int j=0,i=0;
        while(j<nums.size()&&j<=i){
            if(i==nums.size()) break;
-           if(mp.find(nums[i])==mp.end()) mp[nums[i]]=1;
-           else  mp[nums[i]]++;
-           
-            // if(mp.size()<=k){
-            //     ans+=i-j+1;
-            //     i++;
-            // }
-            
+            mp[nums[i]]++;
                 while(mp.size()>k){
                     mp[nums[j]]--;
                     if(mp[nums[j]]==0) mp.erase(nums[j]); j++; 
