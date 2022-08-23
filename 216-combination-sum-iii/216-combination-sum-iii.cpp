@@ -18,7 +18,7 @@ public:
             return;
         }
         for (int i = begin; i != candidates.size() && target >= candidates[i]; ++i)
-            if (i == begin || candidates[i] != candidates[i - 1]) {
+            if (i == begin || candidates[i] != candidates[i - 1]||true) {
                 combination.push_back(candidates[i]);
                 combinationSum2(candidates, target - candidates[i], res, combination, i + 1,k);
                 combination.pop_back();
