@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    void permut (vector<vector<int>> &res,int ind,vector<int>&nums){
+    void permut (vector<vector<int>> &res,int ind,vector<int> nums){
         if(ind==nums.size()){
             res.push_back(nums);
             return ;
