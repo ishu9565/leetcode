@@ -1,19 +1,21 @@
 class Solution {
 public:
-    int help(vector<int>& coins, int amount, int n,vector<vector<int>>&h)
-    {
-        if(amount == 0) return 0;
-        if(n < 0 || amount < 0) return INT_MAX-1;
-        if(h[n][amount]!= -1) return h[n][amount];
-        int one = help(coins,amount,n-1,h);
-        int two = 1+help(coins,amount-coins[n],n,h);
-        h[n][amount] = min(one,two);
-        return h[n][amount];
-    }
     
+    int find_min(vector<int>& coins,vector<vector<int>> &dp,int amount,int ind){
+        if(amount==0) return 0;
+        if(amount<0||ind<0) return INT_MAX-1;;
+        if(dp[ind][amount]!=-1) return dp[ind][amount];
+        int r= 1+find_min(coins,dp,amount-coins[ind],ind);
+        int l= find_min(coins,dp,amount,ind-1);
+       
+        dp[ind][amount]=min(l,r);
+        return dp[ind][amount];
+    }
     int coinChange(vector<int>& coins, int amount) {
-        vector<vector<int>>h(coins.size()+1,vector<int>(amount+1,-1));
-        int ans = help(coins,amount,coins.size()-1,h);
-        return (ans < INT_MAX-1)?ans:-1;
+        vector<vector<int>> dp(coins.size()+1,vector<int>(amount+1,-1));
+        int ans=find_min(coins,dp,amount,coins.size()-1);
+        if(ans<INT_MAX-1) return ans;
+        else return -1;
+     
     }
 };
