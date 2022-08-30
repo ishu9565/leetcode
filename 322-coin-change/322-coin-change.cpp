@@ -12,10 +12,17 @@ public:
         return dp[ind][amount];
     }
     int coinChange(vector<int>& coins, int amount) {
-        vector<vector<int>> dp(coins.size()+1,vector<int>(amount+1,-1));
-        int ans=find_min(coins,dp,amount,coins.size()-1);
-        if(ans<INT_MAX-1) return ans;
-        else return -1;
+        vector<int> dp(amount+1,INT_MAX-1);
+        dp[0]=0;
+        for(int i=1;i<=amount;i++){
+            for(int j=0;j<coins.size();j++){
+                if(i>=coins[j]){
+                    dp[i]=min(dp[i],1+dp[i-coins[j]]);
+                }
+            }
+        }
+        if(dp[amount]>=INT_MAX-1) return -1;
+        else return dp[amount];
      
     }
 };
