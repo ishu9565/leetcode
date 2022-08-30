@@ -10,7 +10,7 @@ public:
         for(int i=ind;i<nums.size();i++){
             swap(nums[i],nums[ind]);
             permut(res,ind+1,nums);
-            swap(nums[i],nums[ind]);
+            // swap(nums[i],nums[ind]);
         }
     }
     vector<vector<int>> permute(vector<int>& nums) {
