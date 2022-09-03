@@ -1,39 +1,26 @@
 class Solution {
 public:
-    bool check_valid(string s){
-        stack<char> st;
+    
+    bool isvalid(string s){
+        int cnt=0;
         for(int i=0;i<s.size();i++){
-            if(s[i]=='('){
-                st.push('(');}
-                else{
-                    if(st.size()==0) return false;
-                    else if(st.top()==')') return false;
-                        
-                    else
-                        st.pop();
-                
-            }
-        }
-        if(st.size()==0) return true;
-        else return false;
-        
+            if(s[i]=='(') cnt++;
+            if(s[i]==')') cnt--;
+            if(cnt<0) return false;
+        }        
+        return true;
     }
-    vector<string> generateParenthesis(int n) 
-    {
-        vector<string>res;
+    vector<string> generateParenthesis(int n) {
         string s="";
+        vector<string > ans;
         for(int i=0;i<n;i++){
             s+="()";
         }
-        res.push_back(s);
-      string g= s;
-          next_permutation(s.begin(),s.end());
-        while(g!=s){
-             if(check_valid(s)) 
-                 res.push_back(s);
-             next_permutation(s.begin(),s.end());
+        sort(s.begin(),s.end());
+        do{
+            if(isvalid(s)) ans.push_back(s);
         }
-        return res;
+        while(next_permutation(s.begin(),s.end()));
+            return ans;
     }
-    
 };
