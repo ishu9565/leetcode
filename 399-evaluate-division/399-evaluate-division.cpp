@@ -29,8 +29,8 @@ public:
         }
                                
             for(int i=0;i<queries.size();i++){
-                if(queries[i][0]==queries[i][1]&& graph.find(queries[i][1])!=graph.end()) { res.push_back(1); continue;}
-                if(queries[i][0]==queries[i][1]&& graph.find(queries[i][1])==graph.end()) { res.push_back(-1); continue;}
+//                 if(queries[i][0]==queries[i][1]&& graph.find(queries[i][1])!=graph.end()) { res.push_back(1); continue;}
+//                 if(queries[i][0]==queries[i][1]&& graph.find(queries[i][1])==graph.end()) { res.push_back(-1); continue;}
                
                 unordered_set<string> vis;
                 res.push_back(dfs(graph,vis,queries[i][0],queries[i][1]));
