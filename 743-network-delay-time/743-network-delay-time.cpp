@@ -17,7 +17,7 @@ public:
             int n_cost=pq.top().first;
             int node=pq.top().second;
             pq.pop();
-            if (dist[node] < n_cost) continue; 
+            // if (dist[node] < n_cost) continue; 
             vis[node]=1;
             for(auto a: graph[node]){
                 if(vis[a.first]==1) continue;
